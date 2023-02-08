@@ -1,10 +1,8 @@
-﻿using Azure.Core;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Schedule.API.V1.Dtos;
 using Schedule.Domain.Entities.ScheduleAggregation.Services;
-using Schedule.Domain.Entities.UserAggregation;
 
 namespace Schedule.API.V1.Controllers
 {

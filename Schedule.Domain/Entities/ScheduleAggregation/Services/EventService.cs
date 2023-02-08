@@ -39,6 +39,19 @@ namespace Schedule.Domain.Entities.ScheduleAggregation.Services
             return null;
         }
 
+        public async Task<bool> ActivateEvent(Guid eventId)
+        {
+            var @event = await _repository.Query<Event>().FirstOrDefaultAsync(e => e.Id == eventId);
+            if (@event is not null)
+            {
+                @event.ActiveEvent();
+                await _repository.SaveChangeAsync();
+                return true;
+            }
+
+            return false;
+        }
+
         public async Task DeleteEvent(Guid id)
         {
             var @event = _repository.Query<Event>().FirstOrDefault(e => e.Id == id);

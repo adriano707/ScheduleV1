@@ -72,5 +72,17 @@ namespace Schedule.API.V1.Controllers
 
             return BadRequest(validateResult.Errors);
         }
+
+        [HttpPatch]
+        [Route("{id}")]
+        public async Task<IActionResult> ActiveEvent([FromRoute] Guid id)
+        {
+            if (id == Guid.Empty) return BadRequest();
+            
+            await _eventService.ActivateEvent(id);
+
+            return Ok();
+
+        }
     }
 }

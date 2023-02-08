@@ -13,7 +13,7 @@ namespace Schedule.CrossCutting.Identity
 {
     public static class IndentityConfiguration
     {
-        public static void AddIdentityConfiguration(this IServiceCollection services, IConfiguration configuration)
+        public static void AddIdentityConfiguration(this IServiceCollection services, IConfiguration configuration )
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("app"), a => a.MigrationsHistoryTable("MigrationIdentity")));
@@ -31,28 +31,7 @@ namespace Schedule.CrossCutting.Identity
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["jwt:key"])),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
-            services.AddAuthorization(auth =>
-            {
-                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
-                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-                    .RequireAuthenticatedUser().Build());
-            });
+            
         }
     }
 }

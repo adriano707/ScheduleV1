@@ -1,7 +1,9 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Schedule.API.V1.Configuration;
 using Schedule.API.V1.Dtos;
 using Schedule.API.V1.Identity;
+using Schedule.API.V1.Settings;
 using Schedule.API.V1.Swegger;
 using Schedule.API.V1.Validations;
 using Schedule.CrossCutting.Identity;
@@ -24,6 +26,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
 builder.Services.AddIdentityConfiguration(builder.Configuration);
+builder.Services.AddAuthorizationConfiguration(builder.Configuration);
 
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 {
@@ -44,6 +47,8 @@ builder.Services.AddSweggerConfiguration();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IUserIdentity, UserIdentity>();
+
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(nameof(JwtSettings)));
 
 var app = builder.Build();
 

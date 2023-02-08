@@ -9,5 +9,6 @@ namespace Schedule.Domain.Entities.ScheduleAggregation.Services
         Task<List<Event>> GetAllEvent();
         Task<Event> UpdateEvent(Guid id, string name, string description, DateTimeOffset date, string locality, int participants, EventType eventType);
         Task<Event> CreateEvent(string name, string description, DateTimeOffset date, string locality, int participants, EventType eventType, Guid scheduleId);
+        Task<bool> ActivateEvent(Guid eventId);
     }
 }
