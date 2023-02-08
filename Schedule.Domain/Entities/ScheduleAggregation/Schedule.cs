@@ -4,7 +4,7 @@ namespace Schedule.Domain.Entities.ScheduleAggregation
 {
     public class Schedule
     {
-        private List<ScheduleEvent> _events;
+        private List<ScheduleEvent> _scheduleEvents;
 
         public Guid Id { get; private set; }
         public User User { get;  private set; }
@@ -13,11 +13,11 @@ namespace Schedule.Domain.Entities.ScheduleAggregation
         public string Description { get; private set; }
 
         public Schedule() { }
-        public IReadOnlyCollection<ScheduleEvent> Events => _events;
+        public IReadOnlyCollection<ScheduleEvent> ScheduleEvents => _scheduleEvents;
 
         public Schedule(User user, string name, string description)
         {
-            _events = new List<ScheduleEvent>();
+            _scheduleEvents = new List<ScheduleEvent>();
             Id = Guid.NewGuid();
             User = user ?? throw new ArgumentNullException(nameof(user));
             Name = name ?? throw new ArgumentNullException(nameof(name));
@@ -26,12 +26,12 @@ namespace Schedule.Domain.Entities.ScheduleAggregation
 
         public void AddEvent(Event @event, bool isOwner = false)
         {
-            if (_events is null)
+            if (_scheduleEvents is null)
             {
-                _events = new List<ScheduleEvent>();
+                _scheduleEvents = new List<ScheduleEvent>();
             }
 
-            _events.Add(new ScheduleEvent(this, @event));
+            _scheduleEvents.Add(new ScheduleEvent(this, @event));
         }
 
         public void UpdateSchedule(string name, string description)

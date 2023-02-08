@@ -20,7 +20,7 @@ namespace Schedule.Domain.Entities.ScheduleAggregation.Services
                 throw new ExclusiveEventOverlayException();
 
             var schedule = _repository.Query<Schedule>()
-                .Include(s => s.Events)
+                .Include(s => s.ScheduleEvents)
                 .FirstOrDefault(s => s.Id == scheduleId);
 
             if (schedule is not null)

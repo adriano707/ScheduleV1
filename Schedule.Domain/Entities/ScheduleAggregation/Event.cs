@@ -14,7 +14,7 @@ namespace Schedule.Domain.Entities.ScheduleAggregation
         public EventStatus Status { get; private set; }
         public bool IsActive { get; private set; }
         private List<ScheduleEvent> _scheduleEvents;
-        public IReadOnlyCollection<ScheduleEvent> Events => _scheduleEvents;
+        public IReadOnlyCollection<ScheduleEvent> ScheduleEvents => _scheduleEvents;
 
         public Event(string name, string description, DateTimeOffset date, string locality, int participants, EventType eventType)
         {

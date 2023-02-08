@@ -11,7 +11,7 @@ namespace Schedule.Data.Configuration
             builder.HasOne(u => u.User).WithMany(u => u.Schedules);
             builder.Property(s => s.UserId).HasColumnType("nvarchar(450)");
 
-            builder.HasMany(e => e.Events)
+            builder.HasMany(e => e.ScheduleEvents)
                 .WithOne(s => s.Schedule).HasForeignKey(e => e.ScheduleId);
         }
     }
