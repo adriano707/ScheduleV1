@@ -31,7 +31,7 @@ namespace Schedule.Domain.Entities.ScheduleAggregation
                 _scheduleEvents = new List<ScheduleEvent>();
             }
 
-            _scheduleEvents.Add(new ScheduleEvent(this, @event));
+            _scheduleEvents.Add(new ScheduleEvent(this, @event, isOwner));
         }
 
         public void UpdateSchedule(string name, string description)

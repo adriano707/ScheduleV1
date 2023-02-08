@@ -27,8 +27,10 @@ namespace Schedule.Domain.Entities.ScheduleAggregation.Services
             {
                 Event @event = new Event(name, description, date, locality, participants, eventType);
                 await _repository.InsertAsync(@event);
+
                 schedule.AddEvent(@event, true);
                 _repository.Update(schedule);
+
                 await _repository.SaveChangeAsync();
 
                 return @event;
